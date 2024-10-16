@@ -7,17 +7,13 @@
 
 import UIKit
 
-class HeaderTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+final class HeaderTableViewCell: UITableViewCell {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var surnameLabel: UILabel!
+    
+    @IBAction func phoneButtonAction() {
+        print("Calling \(nameLabel.text ?? "") \(surnameLabel.text ?? "")")
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
 
 }

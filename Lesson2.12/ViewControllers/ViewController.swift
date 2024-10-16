@@ -36,23 +36,24 @@ final class ViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let contentView = UIView()
-        contentView.backgroundColor = .gray
+        let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell")
+        let headerCell = cell as? HeaderTableViewCell
+        let person = persons[section]
+        headerCell?.nameLabel.text = person.name
+        headerCell?.surnameLabel.text = person.surname
         
-        let fullNameLabel = UILabel(
-            frame: CGRect(
-                x: 16,
-                y: 3,
-                width: tableView.frame.width - 32,
-                height: 20
-            )
-        )
-        fullNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        fullNameLabel.textColor = .white
-        fullNameLabel.text = persons[section].fullName
-        
-        contentView.addSubview(fullNameLabel)
-        return contentView
+        return headerCell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        60
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        UIView.animate(withDuration: 0.5) {
+            view.transform = CGAffineTransform.identity
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
